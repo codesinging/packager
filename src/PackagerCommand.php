@@ -186,6 +186,10 @@ class PackagerCommand extends Command
         $file = $this->packageDirectory . 'composer.json';
         $data = json_decode(file_get_contents($file), true);
 
+        $data['require'] = [
+            "php" => ">7.1"
+        ];
+
         $data['autoload'] = [
             'psr-4' => [
                 $this->config['namespace'] . '\\' => 'src',
