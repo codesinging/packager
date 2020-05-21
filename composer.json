@@ -1,0 +1,22 @@
+{
+    "name": "codesinging/packager",
+    "description": "A composer package to build package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codesinging",
+            "email": "codesinging@gmail.com"
+        }
+    ],
+    "require": [],
+    "autoload": {
+        "psr-4": {
+            "CodeSinging\\Packager\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeSinging\\Packager\\Tests\\": "tests"
+        }
+    }
+}
