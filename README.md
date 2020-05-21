@@ -12,6 +12,10 @@ $ composer require codesinging/packager
 
 ## Usage
 
+```shell
+$ packager build <dirctory>
+```
+
 ## Contributing
 
 You can contribute in these ways:
