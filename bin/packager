@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+
+<?php
+
+use CodeSinging\Packager\PackagerApplication;
+
+if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    require_once dirname(__DIR__) . '/vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require_once __DIR__ . '/../../../autoload.php';
+} else {
+    throw new Exception('Can not find composer autoloader');
+}
+
+$application = new PackagerApplication('Packager', '@package_version@');
+$application->run();

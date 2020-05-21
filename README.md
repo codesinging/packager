@@ -1,4 +1,4 @@
-#  packager
+#  Packager
 
 ## About
 
