@@ -27,7 +27,7 @@ class PackagerCommand extends Command
         'authorEmail' => '',
         'package' => '',
         'name' => '',
-        'vendor' => '',
+        'vendor' => 'codesinging',
         'namespace' => '',
         'description' => '',
         'license' => 'MIT',
@@ -75,7 +75,8 @@ class PackagerCommand extends Command
         $git = $this->getGitConfig();
         $helper = $this->getHelper('question');
 
-        $question = new Question('Name of package (example: <fg=yellow>foo/bar</fg=yellow>): ');
+        $vendor = $this->config['vendor'] . '/' . $this->config['directory'];
+        $question = new Question("Name of package [<fg=yellow>{$vendor}</fg=yellow>]: ", $vendor);
         $question->setValidator(function ($value) {
             if (empty(trim($value))) {
                 throw new \Exception('The name of package can not be empty');
