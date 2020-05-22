@@ -18,6 +18,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class PackagerCommand extends Command
 {
+    protected $defaultVendor = 'codesinging';
+    protected $defaultNamespace = 'CodeSinging';
+
     /**
      * @var array Package information
      */
@@ -27,7 +30,7 @@ class PackagerCommand extends Command
         'authorEmail' => '',
         'package' => '',
         'name' => '',
-        'vendor' => 'codesinging',
+        'vendor' => '',
         'namespace' => '',
         'description' => '',
         'license' => 'MIT',
@@ -75,8 +78,8 @@ class PackagerCommand extends Command
         $git = $this->getGitConfig();
         $helper = $this->getHelper('question');
 
-        $vendor = $this->config['vendor'] . '/' . $this->config['directory'];
-        $question = new Question("Name of package [<fg=yellow>{$vendor}</fg=yellow>]: ", $vendor);
+        $package = $this->defaultVendor . '/' . $this->config['directory'];
+        $question = new Question("Name of package [<fg=yellow>{$package}</fg=yellow>]: ", $package);
         $question->setValidator(function ($value) {
             if (empty(trim($value))) {
                 throw new \Exception('The name of package can not be empty');
@@ -91,15 +94,22 @@ class PackagerCommand extends Command
 
         // package: vendor/name
         $this->config['package'] = $helper->ask($input, $output, $question);
-        $namespace = implode('\\', array_map([$this, 'studlyCase'], explode('/', $this->config['package'])));
-
-        // namespace: Vendor\Name
-        $question = new Question("Namespace of package [<fg=yellow>{$namespace}</fg=yellow>]: ", $namespace);
-        $this->config['namespace'] = $helper->ask($input, $output, $question);
 
         // vendor
         $this->config['vendor'] = strstr($this->config['package'], '/', true);
+
+        // name
         $this->config['name'] = substr($this->config['package'], strlen($this->config['vendor']) + 1);
+
+        // namespace: Vendor\Name
+        $namespace = sprintf(
+            '%s\%s',
+            $this->config['vendor'] === $this->defaultVendor ? $this->defaultNamespace : $this->studlyCase($this->config['vendor']),
+            $this->studlyCase($this->config['name'])
+        );
+
+        $question = new Question("Namespace of package [<fg=yellow>{$namespace}</fg=yellow>]: ", $namespace);
+        $this->config['namespace'] = $helper->ask($input, $output, $question);
 
         // description
         $question = new Question('Description of package: ', $this->config['name']);
