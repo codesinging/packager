@@ -1,8 +1,8 @@
 #  Packager
 
-## About
+## About Packager
 
-A composer package to build package
+A composer package to build composer package
 
 ## Installation
 
