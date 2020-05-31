@@ -2,10 +2,6 @@
 
 __DESCRIPTION__
 
-## About __TITLE__
-
-__DESCRIPTION__
-
 ## Installation
 
 ```shell
