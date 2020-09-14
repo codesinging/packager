@@ -6,6 +6,8 @@ A composer package to build composer package
 
 ## Installation
 
+Make sure you have added `~/.composer/vendor/bin/` to your PATH.
+
 ```shell
 $ composer require codesinging/packager
 ```
