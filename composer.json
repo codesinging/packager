@@ -1,6 +1,7 @@
 {
     "name": "codesinging/packager",
     "description": "A composer package to build package",
+    "version": "1.0.7",
     "license": "MIT",
     "authors": [
         {

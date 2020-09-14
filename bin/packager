@@ -12,5 +12,5 @@ if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
     throw new Exception('Can not find composer autoloader');
 }
 
-$application = new PackagerApplication('Packager', '@package_version@');
+$application = new PackagerApplication('Packager');
 $application->run();

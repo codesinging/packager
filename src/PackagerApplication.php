@@ -15,11 +15,17 @@ class PackagerApplication extends Application
     /**
      * PackagerApplication constructor.
      * @param string $name
-     * @param string $version
      */
-    public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
+    public function __construct(string $name = 'UNKNOWN')
     {
+        $version = $this->version();
         parent::__construct($name, $version);
         $this->add(new PackagerCommand());
+    }
+
+    protected function version()
+    {
+        $data = json_decode(file_get_contents(__DIR__.'/../composer.json'), true);
+        return $data['version'];
     }
 }
